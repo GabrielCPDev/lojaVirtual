@@ -41,8 +41,8 @@
 
 	<div>
 		<h:outputLabel value="Autores" />
-		<h:selectManyListbox value="#{adminLivrosBean.autoresId}"
-			converter="javax.faces.Integer" id="autores">
+		<h:selectManyListbox value="#{adminLivrosBean.livro.autores}"
+			converter="autorConverter" id="autores">
 			<f:selectItems value="#{adminLivrosBean.autores}" var="autor"
 				itemValue="#{autor}" itemLabel="#{autor.nome} " />
 		</h:selectManyListbox>
@@ -52,7 +52,7 @@
 	<div>
 		<h:outputLabel value="Data de publicação"/>
 		<h:inputText value="#{adminLivrosBean.livro.dataPublicacao.time}" id="dataPublicacao">
-		<f:convertDateTime pattern="dd/MM/yyyy"/>
+		<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
 		</h:inputText>
 		<h:message for="dataPublicacao"/>
 	</div>
