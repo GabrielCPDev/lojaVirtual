@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Insert title here</title>
 
-<h:form>
+<h:form enctype="multipart/form-data">
 	
 	<div>
 		<h:outputLabel value="Título" />
@@ -55,6 +55,12 @@
 		<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
 		</h:inputText>
 		<h:message for="dataPublicacao"/>
+	</div>
+	
+	<div>
+	<h:outputLabel value="Capa do Livro"/>
+	<h:inputFile value="#{adminLivrosBean.capaLivro}" id="capaLivro"/>
+	<h:message for="capaLivro"/>
 	</div>
 	
 	
