@@ -7,24 +7,58 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Insert title here</title>
 
-	<h:form>
-		<div>
-			<h:outputLabel value="Título"/>
-			<h:inputText value="#{adminLivrosBean.livro.titulo}"/>
-		</div>		
-		<div>
-			<h:outputLabel value="Descrição"/>
-			<h:inputTextarea rows="4" value="#{adminLivrosBean.livro.descricao}"/>
-		</div>		
-		<div>
-			<h:outputLabel value="Número de Páginas"/>
-			<h:inputText value="#{adminLivrosBean.livro.numeroPaginas}"/>
-		</div>		
-		<div>
-			<h:outputLabel value="Preço"/>
-			<h:inputText value="#{adminLivrosBean.livro.preco}"/>
-		</div>
-		<h:commandButton value="Cadastrar" action="#{adminLivrosBean.salvar}"/>
+<h:form>
 	
-	</h:form>
+	<div>
+		<h:outputLabel value="Título" />
+		<h:inputText value="#{adminLivrosBean.livro.titulo}" required="true"
+			id="titulo" />
+		<h:message for="titulo" />
+	</div>
+	<div>
+		<h:outputLabel value="Descrição" />
+		<h:inputTextarea rows="4" value="#{adminLivrosBean.livro.descricao}"
+			required="true" id="descricao" />
+		<h:message for="descricao" />
+
+	</div>
+	<div>
+		<h:outputLabel value="Número de Páginas" />
+		<h:inputText value="#{adminLivrosBean.livro.numeroPaginas}"
+			required="true" id="numeroPaginas">
+		</h:inputText>
+		<h:message for="numeroPaginas" />
+
+	</div>
+	<div>
+		<h:outputLabel value="Preço" />
+		<h:inputText value="#{adminLivrosBean.livro.preco}" required="true"
+			id="preco">
+		</h:inputText>
+		<h:message for="preco" />
+
+	</div>
+
+	<div>
+		<h:outputLabel value="Autores" />
+		<h:selectManyListbox value="#{adminLivrosBean.autoresId}"
+			converter="javax.faces.Integer" id="autores">
+			<f:selectItems value="#{adminLivrosBean.autores}" var="autor"
+				itemValue="#{autor}" itemLabel="#{autor.nome} " />
+		</h:selectManyListbox>
+		<h:message for="autores"/>
+	</div>
+	
+	<div>
+		<h:outputLabel value="Data de publicação"/>
+		<h:inputText value="#{adminLivrosBean.livro.dataPublicacao.time}" id="dataPublicacao">
+		<f:convertDateTime pattern="dd/MM/yyyy"/>
+		</h:inputText>
+		<h:message for="dataPublicacao"/>
+	</div>
+	
+	
+	<h:commandButton value="Cadastrar" action="#{adminLivrosBean.salvar}" />
+
+</h:form>
 </html>
