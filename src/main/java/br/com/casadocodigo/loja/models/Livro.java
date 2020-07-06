@@ -22,6 +22,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
+
 public class Livro {
 
 	@Id
