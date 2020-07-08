@@ -3,9 +3,13 @@ package br.com.casadocodigo.loja.daos;
 import java.util.List;
 
 import javax.ejb.Stateful;
+import javax.persistence.Cache;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.jpa.QueryHints;
 
 import br.com.casadocodigo.loja.models.Livro;
 
@@ -23,11 +27,22 @@ public class LivroDao {
 		String jpql = "select distinct(l)  from livro l" + " join fetch l.autores";
 		return manager.createQuery(jpql, Livro.class).getResultList();
 	}
+	public void limpaCache() {
+		Cache cache = manager.getEntityManagerFactory().getCache();
+		cache.evict(Livro.class,1l);
+		cache.evictAll();
+		
+		SessionFactory factory = manager.getEntityManagerFactory().unwrap(SessionFactory.class);
+		factory.getCache().evictAllRegions();
+		factory.getCache().evictQueryRegion("home");
+	}
 
 	public List<Livro> ultimosLancamentos() {
+		
 		String jpql = "select l from livro l order by l.dataPublicacao desc";
 		return manager.createQuery(jpql, Livro.class)
 				.setMaxResults(5)
+				.setHint(QueryHints.HINT_CACHEABLE, true).setHint(QueryHints.HINT_CACHE_REGION,"home")
 				.getResultList();
 	}
 
